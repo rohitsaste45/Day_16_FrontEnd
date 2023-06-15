@@ -10,28 +10,33 @@ function App() {
 }
 
 function MyTodo() {
-  let[ sucessBox,setSucessBox] = useState(false)
+  let [sucessBox, setSuccessBox] = useState(false);
+  let [todo, setTodo] = useState({ task: "", description: "" });
 
-  let [todo, setTodo] = useState({ task: " ", description: "" });
-
-  let handleChangeTaskAction = (e) => {
-    let newTodo = { ...todo, task: e.target.value }
+  let handleChnageTaskAction = (e) => {
+    let newTodo = { ...todo, task: e.target.value };
     setTodo(newTodo);
-  }
+  };
 
   let handleChangeDescriptionAction = (e) => {
+    // console.log(e.target);
     let newTodo = { ...todo, description: e.target.value };
     setTodo(newTodo);
-  }
+  };
 
-  let addTodoAction = async() => {
-   let uri =`http://localhost:4000/addtodo?task=${todo.task}&description=${todo.description}`;
-   await fetch(uri);
+  let addTodoAction = async () => {
+    console.log(todo);
 
-   let newTodo = {task : " ", description : " "};
-   setTodo(newTodo);
-   setSucessBox(true);
-  }
+    let url = `http://localhost:4000/addtodo?task=${todo.task}&description=${todo.description}`;
+    await fetch(url);
+
+    // clear the box
+    let newtodo = { task: "", description: "" };
+    setTodo(newtodo);
+
+    setSuccessBox(true);
+  };
+
   return (
     <>
       <input
@@ -39,24 +44,25 @@ function MyTodo() {
         type="text"
         placeholder="Enter task"
         value={todo.task}
-        onChange={handleChangeTaskAction} />
+        onChange={handleChnageTaskAction}
+      />
 
       <textarea
         className="form-control"
         cols="30"
         rows="3"
         placeholder="Enter Description"
-        onChange={handleChangeDescriptionAction}></textarea>
+        value={todo.description}
+        onChange={handleChangeDescriptionAction}
+      ></textarea>
 
       <input type="button" value="Add Todo" onClick={addTodoAction} />
 
       {sucessBox && (
-        <div className=" alert alert-success">Operation Success</div>
+        <div className="alert alert-success">Operation Success</div>
       )}
-
     </>
   );
 }
-
 
 export default App;

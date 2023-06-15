@@ -10,39 +10,50 @@ function App() {
 }
 
 function MyTodo() {
-  let[todo,setTodo] =useState({task :" ",description:""});
+  let[ sucessBox,setSucessBox] = useState(false)
 
-  let handleChangeTaskAction = (e) =>{
-    console.log(e.target);
+  let [todo, setTodo] = useState({ task: " ", description: "" });
 
-    let newTodo = {...todo, task:e.target.value}
+  let handleChangeTaskAction = (e) => {
+    let newTodo = { ...todo, task: e.target.value }
     setTodo(newTodo);
   }
-  let handleChangeDescriptionAction = (e) =>{
-    let newTodo = {...todo,description:e.target.value};
+
+  let handleChangeDescriptionAction = (e) => {
+    let newTodo = { ...todo, description: e.target.value };
     setTodo(newTodo);
   }
-  let addTodoAction = () => {
-    alert(todo.task)
+
+  let addTodoAction = async() => {
+   let uri =`http://localhost:4000/addtodo?task=${todo.task}&description=${todo.description}`;
+   await fetch(uri);
+
+   let newTodo = {task : " ", description : " "};
+   setTodo(newTodo);
+   setSucessBox(true);
   }
   return (
     <>
       <input
-      className="form-control"
-      type="text"
-      placeholder="Entar task"
-      value={todo.task}
-      onChange={handleChangeTaskAction} />
+        className="form-control"
+        type="text"
+        placeholder="Enter task"
+        value={todo.task}
+        onChange={handleChangeTaskAction} />
 
-      <textarea 
-      className="form-contro"
-       cols="30" 
-       rows="10"
-       placeholder="Enter Description"
-       onChange={handleChangeDescriptionAction}></textarea>
+      <textarea
+        className="form-control"
+        cols="30"
+        rows="3"
+        placeholder="Enter Description"
+        onChange={handleChangeDescriptionAction}></textarea>
 
       <input type="button" value="Add Todo" onClick={addTodoAction} />
-      
+
+      {sucessBox && (
+        <div className=" alert alert-success">Operation Success</div>
+      )}
+
     </>
   );
 }

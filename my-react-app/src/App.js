@@ -33,8 +33,10 @@ function MyTodo() {
     // clear the box
     let newtodo = { task: "", description: "" };
     setTodo(newtodo);
-
-    setSuccessBox(true);
+    setTimeout (() => {
+      setSuccessBox(true);
+    },5000);
+    
   };
 
   return (

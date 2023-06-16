@@ -1,6 +1,7 @@
-import { BrowserRouter, Route,Link, Routes } from "react-router-dom";
+import { BrowserRouter, Route,Link, Routes, useNavigate } from "react-router-dom";
 import MyTodo from "./Pages/MyTodo";
 import MyRegistration from "./Pages/MyRegistration";
+import MyNavigationLinks from "./Pages/MyNavigationLinks";
 
 
 function App() {
@@ -22,14 +23,32 @@ function App() {
     </>
   );
 }
-function MyNavigationLinks() {
-  return (
-    <>
-      <Link to={"/home"}>Home |</Link>
-      <Link to={"/todo"}>Todo |</Link>
-      <Link to={"/registration"}>Registration</Link>
-    </>
-  );
+
+function MyNavigationLinksUsingButton(){
+const navigate = useNavigate();
+
+let goToHomeAction = () =>{
+  navigate("/home");
+};
+
+let goToTodaAction = () => {
+  navigate("/todo")
+};
+
+let goToRegistrationAction = () =>{
+  navigate("/registration")
+};
+
+return (
+<div>
+  <input type="button" value="Home" onClick={goToHomeAction} />
+  <input type="button" value="Toda" onClick={goToTodaAction} />
+
+  <input type="button" value="Registration"onClick={goToRegistrationAction} />
+</div>
+
+)
+
 }
 
 export default App;

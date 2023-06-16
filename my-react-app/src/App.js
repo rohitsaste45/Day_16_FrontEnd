@@ -4,6 +4,7 @@ import MyRegistration from "./Pages/MyRegistration";
 import MyNavigationLinks from "./Pages/MyNavigationLinks";
 import MyTodoList from "./Pages/MyTodoList";
 import MyUserList from "./Pages/MyUserList";
+import ValidationDemo from "./Pages/ValidationDemo";
 
 
 function App() {
@@ -19,6 +20,7 @@ function App() {
           <Route path="/todo-list" element ={<MyTodoList/>}/>
           <Route path="/registration" element={<MyRegistration />} />
           <Route path="/user-list" element={<MyUserList/>}/>
+          <Route path="/validation-demo" element={<validationDemo />} />
           <Route path="*" element={<h1>Page Not Found</h1>} />
 
         </Routes>

@@ -7,9 +7,8 @@ function App() {
   return (
     <>
       <BrowserRouter>
-        <Link to={"/home"}>Home</Link>
-        <Link to={"/todo"}>Todo</Link>
-        <Link to={"/registration"}>Registration</Link>
+      <MyNavigationLinks />
+        
         <Routes>
           <Route path="/" element={<h1>Hello</h1>} />
           <Route path="/home" element={<h1>Home</h1>} />
@@ -18,10 +17,21 @@ function App() {
           <Route path="*" element={<h1>Page Not Found</h1>} />
 
         </Routes>
+        <MyNavigationLinks />
       </BrowserRouter>
     </>
   );
 }
+function MyNavigationLinks() {
+  return (
+    <>
+      <Link to={"/home"}>Home |</Link>
+      <Link to={"/todo"}>Todo |</Link>
+      <Link to={"/registration"}>Registration</Link>
+    </>
+  );
+}
+
 export default App;
 
 // <h1>My Todo</h1>
